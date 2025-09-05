@@ -17,7 +17,8 @@ A lightweight GTK-based power menu for Linux that lets you quickly **shutdown, r
 ## Installation (Arch Linux / AUR)
 
 ```bash
-# Clone AUR repo and build
-git clone https://aur.archlinux.org/0xCr4sh-powermenu.git
-cd 0xCr4sh-powermenu
-makepkg -si
+# Clone repo and build
+git clone https://github.com/0xCr4sh/powermenu
+cd powermenu
+./install.sh
+```
