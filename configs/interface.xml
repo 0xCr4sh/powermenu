@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <object class="GtkWindow" id="main_window">
+    <property name="title">System Actions</property>
+    <property name="default-width">300</property>
+    <property name="default-height">400</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">10</property>
+        <property name="margin-top">20</property>
+        <property name="margin-bottom">20</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <child>
+          <object class="GtkButton" id="poweroff_button">
+            <property name="label">Poweroff</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="reboot_button">
+            <property name="label">Reboot</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="logout_button">
+            <property name="label">Logout</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="hibernate_button">
+            <property name="label">Hibernate</property>
+            <property name="halign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="suspend_button">
+            <property name="label">Suspend</property>
+            <property name="halign">center</property>
+          </object>
+         </child>
+	 <child>
+	   <object class="GtkButton" id="cancel_button">
+	     <property name="label">Cancel</property>
+	     <property name="halign">center</property>
+           </object>
+	 </child>
+      </object>
+    </child>
+  </object>
+</interface>
