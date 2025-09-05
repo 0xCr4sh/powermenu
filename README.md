@@ -14,7 +14,7 @@ A lightweight GTK-based power menu for Linux that lets you quickly **shutdown, r
 
 ---
 
-## Installation (Arch Linux / AUR)
+## Installation
 
 ```bash
 # Clone repo and build
