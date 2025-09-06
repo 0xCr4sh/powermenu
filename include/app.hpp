@@ -17,5 +17,4 @@ private:
     static void on_logout_clicked(GtkButton* btn, gpointer user_data);
 
     GtkApplication* app;
-    GtkWidget *window;
 };

@@ -2,7 +2,7 @@
 #include <iostream>
 
 PowerMenuApp::PowerMenuApp() {
-    app = gtk_application_new("com.gtk4.PowerMenu", G_APPLICATION_DEFAULT_FLAGS);
+    app = gtk_application_new("com.powermenu.app", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(on_activate_static), this);
 }
 
@@ -13,50 +13,72 @@ int PowerMenuApp::run(int argc, char **argv) {
 }
 
 void PowerMenuApp::on_activate_static(GtkApplication* app, gpointer user_data) {
-    PowerMenuApp* self = static_cast<PowerMenuApp*>(user_data);
-
     // LOADING UI FROM BUILT RESOURCES
-    gchar *config_path = g_build_filename(
+    gchar *xml_path = g_build_filename(
         g_get_user_config_dir(),
-        "0xCr4sh_powermenu",
+        "0xCr4sh-powermenu",
         "interface.xml",
         NULL
     );
 
-    GtkBuilder* builder = gtk_builder_new_from_file(config_path);
-    g_free(config_path);
+    gchar *css_path = g_build_filename(
+        g_get_user_config_dir(),
+        "0xCr4sh-powermenu",
+        "style.css",
+        NULL
+    );
+
+    GtkBuilder* builder = gtk_builder_new_from_file(xml_path);
+    g_free(xml_path);
 
     // Loading window
     GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(builder, "main_window"));
     gtk_window_set_application(GTK_WINDOW(main_window), app);
-    self->window = main_window;
+
+    // Set window properties
+    gtk_window_set_decorated(GTK_WINDOW(main_window), FALSE);
+
+
+    //gtk_window_fullscreen(GTK_WINDOW(main_window));
 
     // Loading buttons
     GtkWidget* poweroff_btn  = GTK_WIDGET(gtk_builder_get_object(builder, "poweroff_button"));
-    g_signal_connect(poweroff_btn, "clicked", G_CALLBACK(on_poweroff_clicked), NULL);
+    if (poweroff_btn) g_signal_connect(poweroff_btn, "clicked", G_CALLBACK(on_poweroff_clicked), NULL);
 
     GtkWidget* reboot_btn    = GTK_WIDGET(gtk_builder_get_object(builder, "reboot_button"));
-    g_signal_connect(reboot_btn, "clicked", G_CALLBACK(on_reboot_clicked), NULL);
+    if (reboot_btn) g_signal_connect(reboot_btn, "clicked", G_CALLBACK(on_reboot_clicked), NULL);
 
     GtkWidget* suspend_btn   = GTK_WIDGET(gtk_builder_get_object(builder, "suspend_button"));
-    g_signal_connect(suspend_btn, "clicked", G_CALLBACK(on_suspend_clicked), NULL);
+    if (suspend_btn) g_signal_connect(suspend_btn, "clicked", G_CALLBACK(on_suspend_clicked), NULL);
 
     GtkWidget* hibernate_btn = GTK_WIDGET(gtk_builder_get_object(builder, "hibernate_button"));
-    g_signal_connect(hibernate_btn, "clicked", G_CALLBACK(on_hibernate_clicked), NULL);
+    if (hibernate_btn) g_signal_connect(hibernate_btn, "clicked", G_CALLBACK(on_hibernate_clicked), NULL);
 
     GtkWidget* logout_btn    = GTK_WIDGET(gtk_builder_get_object(builder, "logout_button"));
-    g_signal_connect(logout_btn, "clicked", G_CALLBACK(on_logout_clicked), NULL);
+    if (logout_btn) g_signal_connect(logout_btn, "clicked", G_CALLBACK(on_logout_clicked), NULL);
 
     GtkWidget* cancel_btn    = GTK_WIDGET(gtk_builder_get_object(builder, "cancel_button"));
 
-    if (cancel_btn) {
-        g_signal_connect(cancel_btn, "clicked", G_CALLBACK(+[] (GtkButton*, gpointer win) {
+    if (cancel_btn) g_signal_connect(cancel_btn, "clicked", G_CALLBACK(+[] (GtkButton*, gpointer win) {
             gtk_window_close(GTK_WINDOW(win));
-        }), main_window);
-    }
+    }), main_window);
+    
+    // Load and apply CSS
+    GtkCssProvider* css_provider = gtk_css_provider_new();
+    gtk_css_provider_load_from_path(css_provider, css_path);
+    g_free(css_path);
+
+    gtk_style_context_add_provider_for_display(
+        gdk_display_get_default(),         // the display
+        GTK_STYLE_PROVIDER(css_provider),  // your CSS provider
+        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION // priority
+    );
 
     // Show the window
     gtk_widget_show(main_window);
+
+    // Clean up css provider (we don’t need it anymore)
+    g_object_unref(css_provider);
 
     // Clean up builder (we don’t need it anymore)
     g_object_unref(builder);

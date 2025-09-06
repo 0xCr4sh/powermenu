@@ -1,1 +1,34 @@
+/* Paint the whole “window” via a full-size box we control */
+.root-bg {
+    background-color: #000000; /* You can use an image if you want */
+}
 
+/* Your inner panel */
+.box-bg {
+    background-color: #2e3440;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.pm-btn {
+    background-image: none;
+    box-shadow: inset 0 0 0 9999px #3b4252;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    min-width: 96px;
+    min-height: 96px;
+}
+
+.pm-btn:hover {
+    box-shadow: inset 0 0 0 9999px #4c566a;
+}
+
+.pm-btn:active {
+    box-shadow: inset 0 0 0 9999px #5e81ac;
+}
+
+/* Icon size stays big */
+button image {
+    -gtk-icon-size: 64px;
+}
