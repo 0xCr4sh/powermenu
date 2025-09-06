@@ -1,124 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<interface>
+<object class="GtkWindow" id="main_window">
+    <property name="title">PowerMenu</property>
+    <style>
+        <class name="main-window"/>
+    </style>
 
-<!-- Interface config file for Powermenu (UI file for GTK4) -->
-<!-- THIS IS A DEFAULT INSTALLED XML FILE FOR POWERMENU -->
+    <child>
+        <object class="GtkBox" id="main_box">
+            <property name="orientation">horizontal</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="spacing">20</property>
+            <style>
+                <class name="box-bg"/>
+            </style>
 
-<interface domain="com.powermenu.app">
-	<requires lib="gtk" version="4.0" />
+            <!-- Buttons -->
+            <child>
+                <object class="GtkButton" id="poweroff_button">
+                    <style><class name="pm-btn"/></style>
+                    <child>
+                        <object class="GtkImage">
+                            <property name="icon-name">system-shutdown-symbolic</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
 
-	<object class="GtkWindow" id="main_window">
+			            <child>
+                <object class="GtkButton" id="reboot_button">
+                    <style><class name="pm-btn"/></style>
+                    <child>
+                        <object class="GtkImage">
+                            <property name="icon-name">system-reboot-symbolic</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
 
-		<property name="title">PowerMenu</property>
+			<child>
+                <object class="GtkButton" id="suspend_button">
+                    <style><class name="pm-btn"/></style>
+                    <child>
+                        <object class="GtkImage">
+                            <property name="icon-name">weather-clear-night-symbolic</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
 
+			<child>
+                <object class="GtkButton" id="hibernate_button">
+                    <style><class name="pm-btn"/></style>
+                    <child>
+                        <object class="GtkImage">
+                            <property name="icon-name">system-shutdown-symbolic</property>
+                        </object>
+                    </child>
+                </object>
+            </child>
 
-		<!-- Root box fills the whole window and paints the window background -->
-		<child>
-			<object class="GtkBox" id="root_box">
-				<property name="orientation">vertical</property>
-				<property name="hexpand">true</property>
-				<property name="vexpand">true</property>
-				<property name="halign">fill</property>
-				<property name="valign">fill</property>
-				<style>
-					<class name="root-bg" />
-				</style>
+			<child>
+				<object class="GtkButton" id="logout_button">
+					<style><class name="pm-btn"/></style>
+					<child>
+						<object class="GtkImage">
+							<property name="icon-name">system-log-out-symbolic</property>
+						</object>
+					</child>
+				</object>
+			</child>
 
-				<child>
-					<object class="GtkBox" id="main_box">
-						<property name="orientation">horizontal</property>
-						<property name="halign">center</property>
-						<property name="valign">center</property>
-						<property name="hexpand">true</property>
-						<property name="vexpand">true</property>
-						<property name="spacing">20</property>
+			<child>
+				<object class="GtkButton" id="cancel_button">
+					<style><class name="pm-btn"/></style>
+					<child>
+						<object class="GtkImage">
+							<property name="icon-name">window-close-symbolic</property>
+						</object>
+					</child>
+				</object>
+			</child>
 
-						<style>
-							<class name="box-bg" />
-						</style>
-
-						<child>
-							<object class="GtkButton" id="poweroff_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">system-shutdown-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="reboot_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">system-reboot-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="suspend_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">weather-clear-night-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="hibernate_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">document-save-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="logout_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">system-log-out-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-						<child>
-							<object class="GtkButton" id="cancel_button">
-								<style>
-									<class name="pm-btn" />
-								</style>
-								<child>
-									<object class="GtkImage">
-										<property name="icon-name">window-close-symbolic</property>
-									</object>
-								</child>
-							</object>
-						</child>
-
-					</object>
-				</child>
-			</object>
-		</child>
-
-	</object>
-
+            <!-- Repeat for reboot/suspend/hibernate/logout/cancel -->
+        </object>
+    </child>
+</object>
 </interface>

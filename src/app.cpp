@@ -36,10 +36,10 @@ void PowerMenuApp::on_activate_static(GtkApplication* app, gpointer user_data) {
     gtk_window_set_application(GTK_WINDOW(main_window), app);
 
     // Set window properties
+    gtk_style_context_add_class(gtk_widget_get_style_context(main_window), "main-window");
     gtk_window_set_decorated(GTK_WINDOW(main_window), FALSE);
+    gtk_widget_set_opacity(main_window, 0.5);
 
-
-    //gtk_window_fullscreen(GTK_WINDOW(main_window));
 
     // Loading buttons
     GtkWidget* poweroff_btn  = GTK_WIDGET(gtk_builder_get_object(builder, "poweroff_button"));
@@ -60,7 +60,7 @@ void PowerMenuApp::on_activate_static(GtkApplication* app, gpointer user_data) {
     GtkWidget* cancel_btn    = GTK_WIDGET(gtk_builder_get_object(builder, "cancel_button"));
 
     if (cancel_btn) g_signal_connect(cancel_btn, "clicked", G_CALLBACK(+[] (GtkButton*, gpointer win) {
-            gtk_window_close(GTK_WINDOW(win));
+        gtk_window_close(GTK_WINDOW(win));
     }), main_window);
     
     // Load and apply CSS
