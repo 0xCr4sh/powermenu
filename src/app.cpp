@@ -98,7 +98,7 @@ void PowerMenuApp::on_suspend_clicked(GtkButton* btn, gpointer user_data) {
 }
 
 void PowerMenuApp::on_hibernate_clicked(GtkButton* btn, gpointer user_data) {
-    std::system("bash -c 'sleep 1; systemctl suspend &'");
+    std::system("bash -c 'sleep 1; systemctl hibernate &'");
     exit(0); 
 }
 
